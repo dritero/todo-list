@@ -23,7 +23,7 @@
     </div>
 
     <ul>
-        <li v-for="task in tasks"> {{ task }} </li>
+        <li v-for="task in tasks" :class="{strikeout: task.done}" @click="toggleDone(task)"> {{ task.label }} </li>
     </ul>
     <p v-if="tasks.length === 0">You don't seem very busy!</p>
 </div>
@@ -37,21 +37,35 @@
             header: 'Todo List!',
             newTask: '',
             tasks: [
-//                'Wake up at 6:00 AM',
-//                'Learn Vue.js',
-//                'Go to the movies',
-
+                {
+                    label: 'Wake up at 6:00 AM',
+                    done: false,
+                },
+                {
+                    label: 'Learn Vue.js',
+                    done: false,
+                },
+                {
+                    label: 'Go to the movies',
+                    done: false,
+                },
             ]
         },
         methods: {
             addTask: function() {
-                this.tasks.push(this.newTask);
+                this.tasks.push({
+                    label: this.newTask,
+                    done: false,
+                });
                 this.newTask = '';
             },
             changeState: function(newState) {
                 this.state = newState;
 
                 this.newTask = '';
+            },
+            toggleDone: function(task) {
+                task.done = !task.done;
             }
         }
     });
