@@ -10,8 +10,10 @@
 </head>
 <body>
 <div id="todo-list">
-    <h1>{{ header }}</h1>
-    <input type="text" v-model="header">
+    <h1>{{ header.toLocaleUpperCase() }}</h1>
+    <ul>
+        <li v-for="item in items"> {{ item }} </li>
+    </ul>
 </div>
 
 <script src="https://unpkg.com/vue"></script>
@@ -19,7 +21,13 @@
     var shoppingList = new Vue({
         el: '#todo-list',
         data: {
-            header: 'Vue is ready!'
+            header: 'Todo List!',
+            items: [
+                'Wake up at 6:00 AM',
+                'Learn Vue.js',
+                'Go to the movies',
+
+            ]
         }
     });
 </script>
