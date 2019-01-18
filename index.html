@@ -23,7 +23,7 @@
     </div>
 
     <ul>
-        <li v-for="task in tasks" :class="{strikeout: task.done}" @click="toggleDone(task)"> {{ task.label }} </li>
+        <li v-for="task in reversedTasks" :class="{strikeout: task.done}" @click="toggleDone(task)"> {{ task.label }} </li>
     </ul>
     <p v-if="tasks.length === 0">You don't seem very busy!</p>
 </div>
@@ -36,20 +36,12 @@
             state: 'default',
             header: 'Todo List!',
             newTask: '',
-            tasks: [
-                {
-                    label: 'Wake up at 6:00 AM',
-                    done: false,
-                },
-                {
-                    label: 'Learn Vue.js',
-                    done: false,
-                },
-                {
-                    label: 'Go to the movies',
-                    done: false,
-                },
-            ]
+            tasks: []
+        },
+        computed: {
+            reversedTasks() {
+                return this.tasks.slice(0).reverse();
+            }
         },
         methods: {
             addTask: function() {
