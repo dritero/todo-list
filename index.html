@@ -10,8 +10,14 @@
 </head>
 <body>
 <div id="todo-list">
-    <h1>{{ header.toLocaleUpperCase() }}</h1>
-    <div class="add-task-form">
+    <div class="header">
+        <h1>{{ header.toLocaleUpperCase() }}</h1>
+        <button v-if="state === 'default'" @click="changeState('edit')">Add Task</button>
+        <button v-else  @click="changeState('default')">Close</button>
+    </div>
+
+
+    <div v-if="state === 'edit'" class="add-task-form">
         <input type="text" v-model="newTask" placeholder="Add a task" @keyup.enter="addTask">
         <button @click="addTask">Add</button>
     </div>
@@ -19,6 +25,7 @@
     <ul>
         <li v-for="task in tasks"> {{ task }} </li>
     </ul>
+    <p v-if="tasks.length === 0">You don't seem very busy!</p>
 </div>
 
 <script src="https://unpkg.com/vue"></script>
@@ -26,18 +33,24 @@
     var shoppingList = new Vue({
         el: '#todo-list',
         data: {
+            state: 'default',
             header: 'Todo List!',
             newTask: '',
             tasks: [
-                'Wake up at 6:00 AM',
-                'Learn Vue.js',
-                'Go to the movies',
+//                'Wake up at 6:00 AM',
+//                'Learn Vue.js',
+//                'Go to the movies',
 
             ]
         },
         methods: {
             addTask: function() {
                 this.tasks.push(this.newTask);
+                this.newTask = '';
+            },
+            changeState: function(newState) {
+                this.state = newState;
+
                 this.newTask = '';
             }
         }
