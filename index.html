@@ -11,7 +11,11 @@
 <body>
 <div id="todo-list">
     <h1>{{ header.toLocaleUpperCase() }}</h1>
-    <input type="text" v-model="newTask" placeholder="Add a task">
+    <div class="add-task-form">
+        <input type="text" v-model="newTask" placeholder="Add a task" @keyup.enter="tasks.push(newTask)">
+        <button @click="tasks.push(newTask)">Add</button>
+    </div>
+
     <ul>
         <li v-for="task in tasks"> {{ task }} </li>
     </ul>
