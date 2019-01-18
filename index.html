@@ -19,7 +19,7 @@
 
     <div v-if="state === 'edit'" class="add-task-form">
         <input type="text" v-model="newTask" placeholder="Add a task" @keyup.enter="addTask">
-        <button @click="addTask">Add</button>
+        <button @click="addTask" :disabled="newTask.length === 0">Add</button>
     </div>
 
     <ul>
