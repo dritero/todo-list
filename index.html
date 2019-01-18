@@ -12,8 +12,8 @@
 <div id="todo-list">
     <h1>{{ header.toLocaleUpperCase() }}</h1>
     <div class="add-task-form">
-        <input type="text" v-model="newTask" placeholder="Add a task" @keyup.enter="tasks.push(newTask)">
-        <button @click="tasks.push(newTask)">Add</button>
+        <input type="text" v-model="newTask" placeholder="Add a task" @keyup.enter="addTask">
+        <button @click="addTask">Add</button>
     </div>
 
     <ul>
@@ -34,6 +34,12 @@
                 'Go to the movies',
 
             ]
+        },
+        methods: {
+            addTask: function() {
+                this.tasks.push(this.newTask);
+                this.newTask = '';
+            }
         }
     });
 </script>
