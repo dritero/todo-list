@@ -11,8 +11,9 @@
 <body>
 <div id="todo-list">
     <h1>{{ header.toLocaleUpperCase() }}</h1>
+    <input type="text" v-model="newTask" placeholder="Add a task">
     <ul>
-        <li v-for="item in items"> {{ item }} </li>
+        <li v-for="task in tasks"> {{ task }} </li>
     </ul>
 </div>
 
@@ -22,7 +23,8 @@
         el: '#todo-list',
         data: {
             header: 'Todo List!',
-            items: [
+            newTask: '',
+            tasks: [
                 'Wake up at 6:00 AM',
                 'Learn Vue.js',
                 'Go to the movies',
